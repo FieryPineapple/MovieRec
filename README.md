@@ -1,2 +1,0 @@
-# Project
-CS4800 
