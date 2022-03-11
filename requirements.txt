@@ -3,3 +3,4 @@ Flask
 cryptography
 python-math==0.0.1
 Cinemagoer
+JustWatch==0.5.1
