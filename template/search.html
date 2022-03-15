@@ -9,16 +9,19 @@
         <a class="active" href="/">Home</a>
         <a href="actors">Actors</a>
         <a href="movies">Movies</a>
+        <a href="mystuff">My Stuff</a>
         <a href="search">Search</a>
     </div>
-   <form align=center class="form-inline my-2 my-lg-0" method="'GET">
-        Search By: <select name="types" method="GET" action="/">
-            {% for choice in types %}
-                <option value="{{choice}}" SELECTED>{{choice}}</option>
+    <h1 align>Search by:</h1>
+    <form align=center action="{{ url_for('results') }}" method="POST">
+        <select name="types" method="GET" action="/">
+            <option value="{{types[0]}}" selected>{{types[0]}}</option>
+            {% for choice in types[1:] %}
+                <option value="{{choice}}">{{choice}}</option>
             {% endfor %}
         </select>
        <input class="'form-control" name="search" placeholder="Search" autocomplete="'off" type="text">
-       <button class="'btn btn-primary" type="submit">Search</button>
-   </form>
+       <input type="submit" value="Search"/>
+    </form>
 </body>
 </html>

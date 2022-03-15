@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movie Rec</title>
+    <title>Results</title>
 </head>
 <body>
     <div align=center class="topnav">
@@ -12,7 +12,9 @@
         <a href="mystuff">My Stuff</a>
         <a href="search">Search</a>
     </div>
-   <h1>Welcome to Movie Rec</h1> 
-   <p>Recommendations based on your list...</p> 
+    <h1>Results for '{{search_name}}'</h1>
+    {% for name in name_list %}
+        <p>{{name}}</p>
+    {% endfor %}  
 </body>
 </html>
