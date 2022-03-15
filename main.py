@@ -31,7 +31,6 @@ def search():
     #     session["search"] = search_name
     #     return redirect(url_for('results', search_type=search_type, search_name=search_name))
     return render_template('search.html', types=types)
-        #return actor_name
 
 @app.route('/results', methods = ['POST'])
 def results():
@@ -56,5 +55,9 @@ def results():
 @app.route('/mystuff')
 def mystuff():
     return render_template('mystuff.html')
+
+@app.route('/movies')
+def movies():
+    return render_template('movies.html')
 
 app.run(host = "0.0.0.0")
