@@ -5,8 +5,8 @@ import cg
 from imdb import Cinemagoer
 #from justwatch import JustWatch
 
-app = Flask(__name__, template_folder = 'template')
-app.config["DEBUG"] = True
+application = Flask(__name__, template_folder = 'template')
+application.config["DEBUG"] = True
 
 #ia = cg.search()
 cg = Cinemagoer()
@@ -17,11 +17,11 @@ search_type = "Actor/Actress"
 result_list = ""
 name_list = []
 
-@app.route('/')
+@application.route('/')
 def home():
     return render_template('home.html')
 
-@app.route('/search', methods = ['GET', 'POST'])
+@application.route('/search', methods = ['GET', 'POST'])
 def search():
     types = ['Actor/Actress', 'Movie', 'Director', 'Production Company']
     # if request.method == 'POST':
@@ -32,7 +32,7 @@ def search():
     #     return redirect(url_for('results', search_type=search_type, search_name=search_name))
     return render_template('search.html', types=types)
 
-@app.route('/results', methods = ['POST'])
+@application.route('/results', methods = ['POST'])
 def results():
     # search_type = session["types"]
     # search_name = session["search"]
@@ -52,12 +52,12 @@ def results():
     return render_template('results.html', search_name=search_name, name_list=name_list)
 
 
-@app.route('/mystuff')
+@application.route('/mystuff')
 def mystuff():
     return render_template('mystuff.html')
 
-@app.route('/movies')
+@application.route('/movies')
 def movies():
     return render_template('movies.html')
 
-app.run(host = "0.0.0.0")
+application.run(host = "0.0.0.0",port=8080)
