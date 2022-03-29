@@ -5,37 +5,29 @@ import cg
 from imdb import Cinemagoer
 #from justwatch import JustWatch
 
-app = Flask(__name__, template_folder = 'template')
-app.config["DEBUG"] = True
+application = Flask(__name__, template_folder = 'template')
+application.config["DEBUG"] = True
 
-#ia = cg.search()
 cg = Cinemagoer()
 #jw = JustWatch(country='US')
 
-search_name = "keanu reeves"
-search_type = "actor"
+search_name = ""
+search_type = ""
 result_list = ""
 name_list = []
 
-@app.route('/')
+@application.route('/')
 def home():
     return render_template('home.html')
 
-@app.route('/search', methods = ['GET', 'POST'])
+@application.route('/search', methods = ['GET', 'POST'])
 def search():
-    #types = ['Actor/Actress', 'Movie', 'Director', 'Production Company']
-    if request.method == 'POST':
-        # search_type = request.form.get['choice']
-        # search_name = request.form.get['search']
-        # session["choice"] = search_type
-        # session["search"] = search_name
-        return redirect(url_for('results', search_type=search_type, search_name=search_name))
     return render_template('search.html')
 
-@app.route('/results', methods = ['POST', 'GET'])
+@application.route('/results', methods = ['POST', 'GET'])
 def results():
-    # search_type = request.args.get("choice")
-    # search_name = request.args.get("search")
+    search_type = request.form.get("choice")
+    search_name = request.form.get("search")
     if request.method == 'POST':
         if search_type == 'actor':
             result_list = cg.search_person(search_name)
@@ -52,12 +44,12 @@ def results():
     return render_template('results.html', search_name=search_name, name_list=name_list)
 
 
-@app.route('/mystuff')
+@application.route('/mystuff')
 def mystuff():
     return render_template('mystuff.html')
 
-@app.route('/movies')
+@application.route('/movies')
 def movies():
     return render_template('movies.html')
 
-app.run(host = "0.0.0.0")
+application.run(host = "0.0.0.0",port=8080)
