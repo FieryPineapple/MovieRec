@@ -12,12 +12,12 @@
         <a href="search">Search</a>
     </div>
     <h1 align>Search by:</h1>
-    <form align=center action="{{ url_for('results') }}" method="POST">
-        <select name="types" method="GET" action="/">
-            <option value="{{types[0]}}" selected>{{types[0]}}</option>
-            {% for choice in types[1:] %}
-                <option value="{{choice}}">{{choice}}</option>
-            {% endfor %}
+    <form align=center action="/results" method="POST">
+        <select name="choice" method="GET" action="/">
+            <option value="actor">Actor</option>
+            <option value="movie">Movie</option>
+            <option value="director">Director</option>
+            <option value="company">Production Company</option>
         </select>
        <input class="'form-control" name="search" placeholder="Search" autocomplete="'off" type="text">
        <input type="submit" value="Search"/>
