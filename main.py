@@ -13,7 +13,7 @@ cg = Cinemagoer()
 #jw = JustWatch(country='US')
 
 search_name = "keanu reeves"
-search_type = "Actor/Actress"
+search_type = "actor"
 result_list = ""
 name_list = []
 
@@ -23,27 +23,27 @@ def home():
 
 @app.route('/search', methods = ['GET', 'POST'])
 def search():
-    types = ['Actor/Actress', 'Movie', 'Director', 'Production Company']
-    # if request.method == 'POST':
-    #     search_type = request.form.get['types']
-    #     search_name = request.form.get['search']
-    #     session["types"] = search_type
-    #     session["search"] = search_name
-    #     return redirect(url_for('results', search_type=search_type, search_name=search_name))
-    return render_template('search.html', types=types)
-
-@app.route('/results', methods = ['POST'])
-def results():
-    # search_type = session["types"]
-    # search_name = session["search"]
+    #types = ['Actor/Actress', 'Movie', 'Director', 'Production Company']
     if request.method == 'POST':
-        if search_type == 'Actor/Actress':
+        # search_type = request.form.get['choice']
+        # search_name = request.form.get['search']
+        # session["choice"] = search_type
+        # session["search"] = search_name
+        return redirect(url_for('results', search_type=search_type, search_name=search_name))
+    return render_template('search.html')
+
+@app.route('/results', methods = ['POST', 'GET'])
+def results():
+    # search_type = request.args.get("choice")
+    # search_name = request.args.get("search")
+    if request.method == 'POST':
+        if search_type == 'actor':
             result_list = cg.search_person(search_name)
             for person in result_list:
                 name = person['name']
                 name_list.append(name)
 
-        if search_type == 'Movie':
+        if search_type == 'movie':
             result_list = cg.search_movie(search_name)
             for movie in result_list:
                 name = movie['title']
