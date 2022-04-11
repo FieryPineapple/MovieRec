@@ -11,7 +11,11 @@
         <a href="mystuff">My Stuff</a>
         <a href="search">Search</a>
     </div>
-   <h1>Welcome to Movie Rec</h1> 
-   <p>Recommendations based on your list...</p> 
+   <h1>Welcome to Movie Rec</h1>
+   <h2>Popular Movies</h2> 
+    {% for m in chart %}
+        <p>{{m}}</p>
+    {% endfor %}    
+   <h2>Recommendations based on your list...</h2> 
 </body>
 </html>
