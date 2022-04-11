@@ -2,6 +2,11 @@ from imdb import Cinemagoer
 
 cg = Cinemagoer()
 
+person = cg.search_person("julia")
+for p in person:
+    print(p['name'])
+    print(p.getID())
+
 class search:
     # actor_name = input("Enter the name of the actor: ")
     # movie_name = input("Enter the name of the")
