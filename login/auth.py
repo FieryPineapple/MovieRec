@@ -16,7 +16,7 @@ def login_post():
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
 
-    user = User.query.fiilter_by(email=email).first()
+    user = User.query.filter_by(email=email).first()
 
     if not user or not check_password_hash(user.password, password):
         flash('Please check that your email and/or password is correct')
