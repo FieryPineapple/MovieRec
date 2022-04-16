@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 align>Search by:</h1>
+    <form align=center action="/results" method="POST">
+        <select name="choice" method="GET" action="/">
+            <option value="actor">Actor</option>
+            <option value="movie">Movie</option>
+            <option value="director">Director</option>
+            <option value="company">Production Company</option>
+        </select>
+       <input class="'form-control" name="search" placeholder="Search" autocomplete="'off" type="text">
+       <input type="submit" value="Search"/>
+    </form>
+{% endblock %}

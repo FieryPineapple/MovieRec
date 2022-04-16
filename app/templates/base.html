@@ -21,8 +21,18 @@
                                 Home
                             </a>
                             {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.movies') }}" class="navbar-item">
+                                Movies
+                            </a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.search') }}" class="navbar-item">
+                                Search
+                            </a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                                Profile
+                                My Stuff
                             </a>
                             {% endif %}
                             {% if not current_user.is_authenticated %}

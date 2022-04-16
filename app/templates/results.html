@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    Results for '{{sname}}'
+</h1>
+    {% for name in nameList %}
+        <p>{{name}}</p>
+    {% endfor %} 
+{% endblock %}
