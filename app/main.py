@@ -10,6 +10,7 @@ cg = Cinemagoer()
 name = ""
 type = ""
 resultList = ""
+image = ""
 nameList = []
 
 @main.route('/')
@@ -18,7 +19,9 @@ def index():
 
 @main.route('/movies')
 def movies():
-    return render_template('movies.html')
+    chart = cg.get_popular100_movies()
+    chart = chart[0:20]
+    return render_template('movies.html', chart=chart)
 
 @main.route('/search', methods = ['GET', 'POST'])
 def search():
@@ -30,6 +33,7 @@ def results():
     name = request.form.get("search")
 
     if request.method == 'POST':
+        nameList.clear()
         if type == 'actor':
             resultList = cg.search_person(name)
             for person in resultList:
@@ -40,6 +44,18 @@ def results():
             resultList = cg.search_movie(name)
             for movie in resultList:
                 n = movie['title']
+                nameList.append(n)
+
+        if type == 'director':
+            resultList = cg.search_person(name)
+            for person in resultList:
+                n = person['name']
+                nameList.append(n)
+
+        if type == 'company':
+            resultList = cg.search_company(name)
+            for company in resultList:
+                n = company['name']
                 nameList.append(n)
     
     return render_template('results.html', sname=name, nameList=nameList)

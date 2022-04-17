@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>List of Movies and Stuff</h1>
+<h1 class="title">
+    List of Movies and Stuff
+</h1>
+<h2 class="subtitle">
+    Popular Movies
+</h2>
+    {% for m in chart %}
+        <p>{{m}}</p>
+    {% endfor %}
 {% endblock %}
