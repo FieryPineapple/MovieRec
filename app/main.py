@@ -60,6 +60,20 @@ def results():
     
     return render_template('results.html', sname=name, nameList=nameList)
 
+@main.route('/information', methods = ['POST', 'GET'])
+def information():
+    person = "0000206"
+    bio = ""
+    other = ""
+    #selection = request.form.get("selection")
+    #if request.method == 'POST':
+    b = cg.get_person(person, info=['biography'])
+    name = "Keanu Reeves"
+    bio = b.get('biography', [])
+    bio = ''.join(bio)
+    o = cg.get_person(person, info=['other works'])
+    other = o.get('other works', [])
+    return render_template('information.html', bio=bio, other=other, name=name)
 
 @main.route('/profile')
 @login_required
