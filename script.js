@@ -234,24 +234,9 @@ function showMovies(data) {
     })
 }
 
-function movieSelected(id) {
-  sessionStorage.setItem('movieId', id);
-  window.location = 'movieDetails.html';
-  return false;
-}
-
-function getMovieDetails() {
-  let movieId = sessionStorage.getItem('movieId');
-  console.log(movieId)
-  fetch(BASE_URL + '/movie/'+movieId+'?'+API_KEY).then(res => res.json()).then(videoData => {
-    console.log(videoData);
-  })
-}
-
 const overlayContent = document.getElementById('overlay-content');
 /* Open when someone clicks on the span element */
 function openNav(movie) {
-  $(".flickity-button").css('display','none');
   let id = movie.id;
   fetch(BASE_URL + '/movie/'+id+'?'+API_KEY).then(res => res.json()).then(videoData => {
     console.log(videoData);
@@ -265,13 +250,13 @@ function openNav(movie) {
             <img src="${movie.poster_path? 'https://image.tmdb.org/t/p/w300'+movie.poster_path: "http://via.placeholder.com/1080x1580" }" alt="${movie.original_title}"
           </div>
         <div class="col-md-8">
-          <h2>${movie.original_title}<h2>
+          <h1 style="color:white;">${movie.original_title}</h1>
           <u1 class="list-group">
-          
-            <li class="listgroup-item"><strong>Genre:</strong> ${movie.overview}</li>
-            <li class="listgroup-item"><strong>Genre:</strong> ${movie.vote_average}</li>
-            <li class="listgroup-item"><strong>Genre:</strong> ${movie.budget}</li>
-            <li class="listgroup-item"><strong>Genre:</strong> ${movie.genres}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.overview}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.vote_average}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.budget}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.genres}</li>
+            <button>Add to Favorites</button>
         
         `
         overlayContent.innerHTML = content;
