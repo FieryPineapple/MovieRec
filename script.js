@@ -86,6 +86,7 @@ const genres = [
 ]
 
 const main = document.getElementById('main');
+const favorites = document.getElementById('favorites');
 const form =  document.getElementById('form');
 const search = document.getElementById('search');
 const tagsEl = document.getElementById('tags');
@@ -94,14 +95,16 @@ const prev = document.getElementById('prev')
 const next = document.getElementById('next')
 const current = document.getElementById('current')
 
+
 var currentPage = 1;
 var nextPage = 2;
 var prevPage = 3;
 var lastUrl = '';
 var totalPages = 100;
-var id = 299;
+var id = 0;
 
-var selectedGenre = []
+var favArr = [];
+var selectedGenre = [];
 setGenre();
 function setGenre() {
   tagsEl.innerHTML= '';
@@ -267,7 +270,7 @@ function openNav(movie) {
             ${movie.overview}
             </h3>
           </div>
-          <button onclick="myFunction()">Add to Favorites</button>
+          <button onclick="addToFavorites()">Add to Favorites</button>
         </div>
       `;
         overlayContent.innerHTML = content;
@@ -278,10 +281,12 @@ function openNav(movie) {
   })
 }
 
-function myFunction() {
-  var test = id + 2
-  console.log("LOL")
+function addToFavorites() {
   console.log(id)
+  favArr.push(id)
+  localStorage.setItem('Favorites', JSON.stringify(favArr));
+  /*(favorites.innerHTML = '';
+  window.location = "favorites.html"*/
 }
 
 /* Close when someone clicks on the "x" symbol inside the overlay */
