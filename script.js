@@ -241,31 +241,31 @@ function openNav(movie) {
   id = movie.id;
   fetch(BASE_URL + '/movie/'+id+'?'+API_KEY).then(res => res.json()).then(videoData => {
     console.log(videoData);
-    console.log(id)
-    console.log(movie.runtime)
-    console.log(movie.original_title)
     if(videoData){
       document.getElementById("myNav").style.width = "100%";
-      if(videoData.poster_path !== null){
+      if(videoData !== null){
         var content = `
         <div class="row">
           <div class="col-md-4">
-            <img src="${movie.poster_path? 'https://image.tmdb.org/t/p/w300'+movie.poster_path: "http://via.placeholder.com/1080x1580" }" alt="${movie.original_title}"
+          <h1 style="color:white;">${movie.original_title}</h1>
+            <img src="${movie.poster_path? 'https://image.tmdb.org/t/p/w300'+movie.poster_path: "https://via.placeholder.com/300x450" }" alt="${movie.original_title}"
           </div>
         <div class="col-md-8">
-          <h1 style="color:white;">${movie.original_title}</h1>
           <u1 class="list-group">
-            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.genres}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Voting Average:</strong> ${movie.vote_average}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Movie Budget:</strong> ${movie.budget}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Movie length:</strong> ${movie.runtime}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie Rating:</strong> ${videoData.vote_average}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie Genres:</strong> ${videoData.genres[0].name}, ${videoData.genres[1].name}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie Production Company:</strong> ${videoData.production_companies[0].name}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie Budget:</strong> $${videoData.budget}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie runtime:</strong> ${videoData.runtime} minutes </li>
           </ul>
           </div>
         </div>
         <div class="row">
           <div class="well">
-            <h3 style="color:white;">Plot</h3>
-            <h4 style="color:white;">${movie.overview}</h4>
+            <h3 style="color:white;">Plot
+            <br>
+            ${movie.overview}
+            </h3>
           </div>
           <button onclick="myFunction()">Add to Favorites</button>
         </div>
@@ -283,10 +283,6 @@ function myFunction() {
   console.log("LOL")
   console.log(id)
 }
-
-
-
-
 
 /* Close when someone clicks on the "x" symbol inside the overlay */
 function closeNav() {
