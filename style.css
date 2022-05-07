@@ -23,6 +23,7 @@ body{
 
 }
 
+
 .brand-title {
     font-size: 2.5rem;
     color: white;
@@ -264,47 +265,3 @@ main{
       right: 35px;
     }
   }
-
-  .embed.hide{
-      display: none;
-  }
-
-  .embed.show{
-      display: inline-block;
-  }
-
-  .arrow{
-      position: absolute;
-      font-size: 40px;
-  }
-
-  .arrow.left-arrow{
-      top:50%;
-      left:5%;
-      transform: translateY(-50%);
-  }
-
-  
-  .arrow.right-arrow{
-    top:50%;
-    transform: translateY(-50%);
-    right:5%;
-}
-
-.dots{
-    margin-top: 30px;
-}
-
-.dots .dot {
-    padding: 5px 15px;
-    border-radius: 50%;
-    border: 5px solid var(--secondary-color);
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    margin: 5px;
-}
-
-.dots .dot.active{
-    border-color: orange;
-}
