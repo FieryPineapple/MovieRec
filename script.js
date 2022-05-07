@@ -99,6 +99,7 @@ var nextPage = 2;
 var prevPage = 3;
 var lastUrl = '';
 var totalPages = 100;
+var id = 299;
 
 var selectedGenre = []
 setGenre();
@@ -237,12 +238,12 @@ function showMovies(data) {
 const overlayContent = document.getElementById('overlay-content');
 /* Open when someone clicks on the span element */
 function openNav(movie) {
-  let id = movie.id;
+  id = movie.id;
   fetch(BASE_URL + '/movie/'+id+'?'+API_KEY).then(res => res.json()).then(videoData => {
     console.log(videoData);
+    console.log(id)
     if(videoData){
       document.getElementById("myNav").style.width = "100%";
-      console.log(videoData)
       if(videoData.poster_path !== null){
         var content = `
         <div class="row">
@@ -252,13 +253,21 @@ function openNav(movie) {
         <div class="col-md-8">
           <h1 style="color:white;">${movie.original_title}</h1>
           <u1 class="list-group">
-            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.overview}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.genres}</li>
             <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.vote_average}</li>
             <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.budget}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.genres}</li>
-            <button>Add to Favorites</button>
-        
-        `
+            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.runtime}</li>
+          </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="well">
+            <h3 style="color:white;">Plot</h3>
+            <h4 style="color:white;">${movie.overview}</h4>
+          </div>
+          <button onclick="myFunction()">Add to Favorites</button>
+        </div>
+      `;
         overlayContent.innerHTML = content;
       }else{
         overlayContent.innerHTML = `<h1 class="no-results">No Results Found</h1>`
@@ -266,6 +275,16 @@ function openNav(movie) {
     }
   })
 }
+
+function myFunction() {
+  var test = id + 2
+  console.log("LOL")
+  console.log(id)
+}
+
+
+
+
 
 /* Close when someone clicks on the "x" symbol inside the overlay */
 function closeNav() {
