@@ -208,7 +208,7 @@ function showMovies(data) {
     main.innerHTML = '';
 
     data.forEach(movie => {
-        const {title, poster_path, vote_average, overview, id} = movie;
+        const {title, poster_path, vote_average, overview, id, budget, runtime} = movie;
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
@@ -242,6 +242,8 @@ function openNav(movie) {
   fetch(BASE_URL + '/movie/'+id+'?'+API_KEY).then(res => res.json()).then(videoData => {
     console.log(videoData);
     console.log(id)
+    console.log(movie.runtime)
+    console.log(movie.original_title)
     if(videoData){
       document.getElementById("myNav").style.width = "100%";
       if(videoData.poster_path !== null){
@@ -254,9 +256,9 @@ function openNav(movie) {
           <h1 style="color:white;">${movie.original_title}</h1>
           <u1 class="list-group">
             <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.genres}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.vote_average}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.budget}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Genre:</strong> ${movie.runtime}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Voting Average:</strong> ${movie.vote_average}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie Budget:</strong> ${movie.budget}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie length:</strong> ${movie.runtime}</li>
           </ul>
           </div>
         </div>
