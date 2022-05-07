@@ -23,6 +23,10 @@ body{
 
 }
 
+.row {
+    margin-left: 25px;
+    margin-right: 25px;
+}
 
 .brand-title {
     font-size: 2.5rem;
