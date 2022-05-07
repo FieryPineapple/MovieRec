@@ -283,10 +283,16 @@ function openNav(movie) {
 
 function addToFavorites() {
   console.log(id)
-  favArr.push(id)
+  if (favArr.includes(id)) {
+    console.log("already favorited")
+  } else {
+    favArr.push(id);
+    console.log("added to favorites");
+  }
   localStorage.setItem('Favorites', JSON.stringify(favArr));
-  /*(favorites.innerHTML = '';
-  window.location = "favorites.html"*/
+  /*favorites.innerHTML = '';
+
+  /*window.location = "favorites.html"*/
 }
 
 /* Close when someone clicks on the "x" symbol inside the overlay */
