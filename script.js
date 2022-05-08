@@ -93,6 +93,7 @@ const tagsEl = document.getElementById('tags');
 const prev = document.getElementById('prev')
 const next = document.getElementById('next')
 const current = document.getElementById('current')
+const favorite = document.getElementById('favorite');
 
 
 var currentPage = 1;
@@ -101,7 +102,7 @@ var prevPage = 3;
 var lastUrl = '';
 var totalPages = 100;
 var id = 0;
-var storedFavorites = '';
+var storedFavorite = '';
 
 var favArr = [];
 var selectedGenre = [];
@@ -206,7 +207,6 @@ function getMovies(url) {
 
 }
 
-
 function showMovies(data) {
     main.innerHTML = '';
     console.log(data)
@@ -272,7 +272,7 @@ function openNav(movie) {
             ${movie.overview}
             </h3>
           </div>
-          <button onclick="addToFavorites()">Add to Favorites</button>
+          <button onclick="addToFavorite()">Add to Favorites</button>
         </div>
         `;
         overlayContent.innerHTML = content;
@@ -283,9 +283,12 @@ function openNav(movie) {
   })
 }
 
-const favorites = document.getElementById('favorites');
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
 
-function addToFavorites() {
+function addToFavorite() {
   console.log(id)
   if (favArr.includes(id)) {
     console.log("already favorited")
@@ -294,24 +297,43 @@ function addToFavorites() {
     console.log("added to favorites");
   }
   localStorage.setItem('Favorites', JSON.stringify(favArr));
-  showFavorites()
+  getFavorite()
 }
 
-function showFavorites() {
-  storedFavorites = JSON.parse(localStorage.getItem("Favorites"));
-  console.log(storedFavorites)
-  for (let i = 0; i < storedFavorites.length; i++) {
-    fetch(BASE_URL + '/movie/'+storedFavorites[i]+'?'+API_KEY).then(res => res.json()).then(favData => {
+function getFavorite() {
+  storedFavorite = JSON.parse(localStorage.getItem("Favorites"));
+  console.log(storedFavorite)
+  for (let i = 0; i < storedFavorite.length; i++) {
+    fetch(BASE_URL + '/movie/'+storedFavorite[i]+'?'+API_KEY).then(res => res.json()).then(favData => {
       console.log(favData);
+      showFavorite(favData)
     })
   }
 }
 
-/* Close when someone clicks on the "x" symbol inside the overlay */
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
+function showFavorite(data) {
+  favorite.innerHTML = ''
+    if (data !== null) {
+      const movieEl2 = document.createElement('div');
+      movieEl2.classList.add('movie');
+      movieEl2.innerHTML = `
+             <img src="${data.poster_path? 'https://image.tmdb.org/t/p/w300'+data.poster_path: "https://via.placeholder.com/300x450" }" alt="${data.title}">
+            <div class="movie-info">
+                <h3>${data.title}</h3>
+                <span class="${getColor(data.vote_average)}">${data.vote_average}</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                ${data.overview}
+                <br/> 
+                <button class="know-more" id="${data.id}">Know More</button>
+            </div>
+        `;
+        favorite.appendChild(movieEl2);
+    } else {
+      favorite.innerHTML = `<h1 class="no-results">No Results Found</h1>`
+    }
 }
-
 
 function getColor(vote) {
     if(vote>= 8){
