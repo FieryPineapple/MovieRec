@@ -86,7 +86,6 @@ const genres = [
 ]
 
 const main = document.getElementById('main');
-const favorites = document.getElementById('favorites');
 const form =  document.getElementById('form');
 const search = document.getElementById('search');
 const tagsEl = document.getElementById('tags');
@@ -102,6 +101,7 @@ var prevPage = 3;
 var lastUrl = '';
 var totalPages = 100;
 var id = 0;
+var storedFavorites = '';
 
 var favArr = [];
 var selectedGenre = [];
@@ -209,9 +209,11 @@ function getMovies(url) {
 
 function showMovies(data) {
     main.innerHTML = '';
+    console.log(data)
+    console.log('hi')
 
     data.forEach(movie => {
-        const {title, poster_path, vote_average, overview, id, budget, runtime} = movie;
+        const {title, poster_path, vote_average, overview, id} = movie;
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
@@ -272,7 +274,7 @@ function openNav(movie) {
           </div>
           <button onclick="addToFavorites()">Add to Favorites</button>
         </div>
-      `;
+        `;
         overlayContent.innerHTML = content;
       }else{
         overlayContent.innerHTML = `<h1 class="no-results">No Results Found</h1>`
@@ -280,6 +282,8 @@ function openNav(movie) {
     }
   })
 }
+
+const favorites = document.getElementById('favorites');
 
 function addToFavorites() {
   console.log(id)
@@ -290,9 +294,17 @@ function addToFavorites() {
     console.log("added to favorites");
   }
   localStorage.setItem('Favorites', JSON.stringify(favArr));
-  /*favorites.innerHTML = '';
+  showFavorites()
+}
 
-  /*window.location = "favorites.html"*/
+function showFavorites() {
+  storedFavorites = JSON.parse(localStorage.getItem("Favorites"));
+  console.log(storedFavorites)
+  for (let i = 0; i < storedFavorites.length; i++) {
+    fetch(BASE_URL + '/movie/'+storedFavorites[i]+'?'+API_KEY).then(res => res.json()).then(favData => {
+      console.log(favData);
+    })
+  }
 }
 
 /* Close when someone clicks on the "x" symbol inside the overlay */
