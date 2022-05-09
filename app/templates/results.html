@@ -2,9 +2,59 @@
 
 {% block content %}
 <h1 class="title">
-    Results for '{{sname}}'
+    Results for '{{name}}'
 </h1>
-    {% for i in nameList %}
-        <p>{{i}}</p>
+    <p id="test"></p>
+<!--
+    <script type="text/javascript">
+        //https://stackoverflow.com/questions/37312816/javascript-split-object-by-key 
+        var dict = JSON.parse('{{searchList|tojson}}');
+        var id = [];
+        var name = [];
+
+        function split(input){
+            var afterID = 0;
+            for(var i in input){
+                if(afterID){
+                    name[i] = input[i]
+                } else {
+                    id[i] = input[i]
+                }
+                if(i == "Name"){
+                }
+            }
+        }
+        split(dict)
+
+        //var id = []
+        //for(var o in dict){
+        //    id.push(dict[o])
+        //}
+
+        let text = id.toString();
+        document.getElementById("test").innerHTML = text;
+    </script>
+-->
+   {% for key, value in searchList.items() %}
+        {% for k, v in value.items() %}  
+            <a href="information">
+                <p>{{v}}</p>
+            </a>
+        {% endfor %}
     {% endfor %} 
+ 
+<!--    {% for n in sName %}
+    {% for i in sID %}
+        <a href="information" id="{{i}}" onclick="sendData()">
+            <p>{{n}}</p>
+        </a>
+    {% endfor %}
+    {% endfor %} 
+-->
 {% endblock %}
+
+<script>
+    function sendData(){
+        console.log(document.getElementById('{{i}}').value)
+    }
+</script>
