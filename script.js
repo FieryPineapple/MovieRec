@@ -371,6 +371,12 @@ next.addEventListener('click', () => {
   }
 })
 
+var favoritesTab = document.getElementById("faves");
+
+favoritesTab.addEventListener('click', () => {
+  console.log('clicked');
+});
+
 function pageCall(page){
   let urlSplit = lastUrl.split('?');
   let queryParams = urlSplit[1].split('&');
