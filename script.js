@@ -306,7 +306,7 @@ function getFavorite() {
   for (let i = 0; i < storedFavorite.length; i++) {
     fetch(BASE_URL + '/movie/'+storedFavorite[i]+'?'+API_KEY).then(res => res.json()).then(favData => {
       console.log(favData);
-      showFavorite(favData)
+      //showFavorite(favData)
     })
   }
 }
