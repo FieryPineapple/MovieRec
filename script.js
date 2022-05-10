@@ -94,7 +94,7 @@ const prev = document.getElementById('prev')
 const next = document.getElementById('next')
 const current = document.getElementById('current')
 const favorite = document.getElementById('favorite');
-
+const favoritesTab = document.getElementById("faves");
 
 var currentPage = 1;
 var nextPage = 2;
@@ -371,10 +371,9 @@ next.addEventListener('click', () => {
   }
 })
 
-var favoritesTab = document.getElementById("faves");
-
 favoritesTab.addEventListener('click', () => {
   console.log('clicked');
+  showFavorite(favArr)
 });
 
 function pageCall(page){
