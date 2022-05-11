@@ -314,8 +314,12 @@ function openNav(movie) {
               <p style="color:white;"><strong>${cast[4]}</strong> (${castChar[4]})</p>
             </h3>          
           </div>
-          <button onclick="addToFavorite()">Add to Favorites</button>
-          <br>
+          <button class="addFav" onclick="addToFavorite()">Add to Favorites</button>
+          <div>
+            <p>
+            <br>
+            </p>
+          </div>
         </div>
         `;
         overlayContent.innerHTML = content;
