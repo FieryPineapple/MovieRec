@@ -244,6 +244,37 @@ const overlayContent = document.getElementById('overlay-content');
 /* Open when someone clicks on the span element */
 function openNav(movie) {
   id = movie.id;
+  var cast = [];
+  var castChar = [];
+  var providers = [];
+  fetch(BASE_URL + '/movie/'+id+'/watch/providers?'+API_KEY).then(res => res.json()).then(providerData => {
+    console.log(providerData);
+    if(providerData.results.US.rent != null){
+      providerData.results.US.rent.forEach(provider => {
+        providers.push(provider.provider_name);
+      })
+    }
+    else if(providerData.results.US.buy != null){
+      providerData.results.US.buy.forEach(provider => {
+        providers.push(provider.provider_name);
+      })
+    }
+    else if(providerData.results.US.flatrate != null){
+      providerData.results.US.flatrate.forEach(provider => {
+        providers.push(provider.provider_name);
+      })
+    }
+    else{
+      providers.push("Not available");
+    }
+  })
+  fetch(BASE_URL + '/movie/'+id+'/credits?'+API_KEY).then(res => res.json()).then(castData => {
+    console.log(castData);
+    castData.cast.forEach(person => {
+      cast.push(person.name);
+      castChar.push(person.character);
+    })
+  })
   fetch(BASE_URL + '/movie/'+id+'?'+API_KEY).then(res => res.json()).then(videoData => {
     console.log(videoData);
     if(videoData){
@@ -260,19 +291,25 @@ function openNav(movie) {
             <li style="color:white;" class="listgroup-item"><strong>Movie Rating:</strong> ${videoData.vote_average}</li>
             <li style="color:white;" class="listgroup-item"><strong>Movie Genres:</strong> ${videoData.genres[0].name}, ${videoData.genres[1].name}</li>
             <li style="color:white;" class="listgroup-item"><strong>Movie Production Company:</strong> ${videoData.production_companies[0].name}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Movie Budget:</strong> $${videoData.budget}</li>
             <li style="color:white;" class="listgroup-item"><strong>Movie runtime:</strong> ${videoData.runtime} minutes </li>
+            <li style="color:white;" class="listgroup-item"><strong>Providers:</strong> ${providers[0]}, ${providers[1]}, ${providers[2]}</li>
           </ul>
           </div>
         </div>
         <div class="row">
           <div class="well">
-            <h3 style="color:white;">Plot
-            <br>
-            ${movie.overview}
-            </h3>
+            <h3 style="color:white;">Plot</h3>
+            <p style="color:white;">${movie.overview}</p>
+            <h3 style="color:white;">Cast</h3>
+              <p style="color:white;"><strong>${cast[0]}</strong> (${castChar[0]})</p>
+              <p style="color:white;"><strong>${cast[1]}</strong> (${castChar[1]})</p>
+              <p style="color:white;"><strong>${cast[2]}</strong> (${castChar[2]})</p>
+              <p style="color:white;"><strong>${cast[3]}</strong> (${castChar[3]})</p>
+              <p style="color:white;"><strong>${cast[4]}</strong> (${castChar[4]})</p>
+            </h3>          
           </div>
           <button onclick="addToFavorite()">Add to Favorites</button>
+          <br>
         </div>
         `;
         overlayContent.innerHTML = content;
