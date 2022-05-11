@@ -224,7 +224,7 @@ function showMovies(data) {
             </div>
             <div class="overview">
                 <h3>Overview</h3>
-                ${overview}
+                ${overview.replace(/^(.{300}[^\s]*).*/, "$1")}...
                 <br/> 
                 <button class="know-more" id="${id}">Know More</button
             </div>
@@ -250,6 +250,7 @@ function openNav(movie) {
   var providers = [];
   fetch(BASE_URL + '/movie/'+id+'/watch/providers?'+API_KEY).then(res => res.json()).then(providerData => {
     console.log(providerData);
+    providers = [];
     if(providerData.results.US.rent != null){
       providerData.results.US.rent.forEach(provider => {
         providers.push(provider.provider_name);
@@ -271,6 +272,8 @@ function openNav(movie) {
   })
   fetch(BASE_URL + '/movie/'+id+'/credits?'+API_KEY).then(res => res.json()).then(castData => {
     console.log(castData);
+    cast = [];
+    castChar = [];
     castData.cast.forEach(person => {
       cast.push(person.name);
       castChar.push(person.character);
@@ -344,11 +347,16 @@ function addToFavorite() {
 function getFavorite() {
   storedFavorite = JSON.parse(localStorage.getItem("Favorites"));
   console.log(storedFavorite)
-  for (let i = 0; i < storedFavorite.length; i++) {
-    fetch(BASE_URL + '/movie/'+storedFavorite[i]+'?'+API_KEY).then(res => res.json()).then(favData => {
-      console.log(favData);
-      showFavorite(favData)
-    })
+  if(storedFavorite == undefined || storedFavorite.length == 0){
+    console.log("No favorites yet");
+  }
+  else {
+    for (let i = 0; i < storedFavorite.length; i++) {
+      fetch(BASE_URL + '/movie/'+storedFavorite[i]+'?'+API_KEY).then(res => res.json()).then(favData => {
+        console.log(favData);
+        showFavorite(favData)
+      })
+    }
   }
 }
 
