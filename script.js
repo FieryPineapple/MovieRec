@@ -260,8 +260,10 @@ function openNav(movie) {
             <li style="color:white;" class="listgroup-item"><strong>Movie Rating:</strong> ${videoData.vote_average}</li>
             <li style="color:white;" class="listgroup-item"><strong>Movie Genres:</strong> ${videoData.genres[0].name}, ${videoData.genres[1].name}</li>
             <li style="color:white;" class="listgroup-item"><strong>Movie Production Company:</strong> ${videoData.production_companies[0].name}</li>
-            <li style="color:white;" class="listgroup-item"><strong>Movie Budget:</strong> $${videoData.budget}</li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie Budget:</strong> $${videoData.budget} </li>
+            <li style="color:white;" class="listgroup-item"><strong>Release Date:</strong> $${videoData.revenue} </li>
             <li style="color:white;" class="listgroup-item"><strong>Movie runtime:</strong> ${videoData.runtime} minutes </li>
+            <li style="color:white;" class="listgroup-item"><strong>Release Date:</strong> ${videoData.release_date} </li>
           </ul>
           </div>
         </div>
@@ -297,6 +299,7 @@ function addToFavorite() {
     console.log("added to favorites");
   }
   localStorage.setItem('Favorites', JSON.stringify(favArr));
+  favorite.innerHTML = ``
   getFavorite()
 }
 
@@ -306,13 +309,12 @@ function getFavorite() {
   for (let i = 0; i < storedFavorite.length; i++) {
     fetch(BASE_URL + '/movie/'+storedFavorite[i]+'?'+API_KEY).then(res => res.json()).then(favData => {
       console.log(favData);
-      //showFavorite(favData)
+      showFavorite(favData)
     })
   }
 }
 
 function showFavorite(data) {
-  favorite.innerHTML = ''
     if (data !== null) {
       const movieEl2 = document.createElement('div');
       movieEl2.classList.add('movie');
