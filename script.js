@@ -337,6 +337,8 @@ function showFavorite(data) {
     }
 }
 
+favorite.innerHTML = getFavorite();
+
 function getColor(vote) {
     if(vote>= 8){
         return 'green'
