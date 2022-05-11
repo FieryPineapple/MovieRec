@@ -240,6 +240,7 @@ function showMovies(data) {
     })
 }
 
+
 const overlayContent = document.getElementById('overlay-content');
 /* Open when someone clicks on the span element */
 function openNav(movie) {
@@ -292,6 +293,8 @@ function openNav(movie) {
             <li style="color:white;" class="listgroup-item"><strong>Movie Genres:</strong> ${videoData.genres[0].name}, ${videoData.genres[1].name}</li>
             <li style="color:white;" class="listgroup-item"><strong>Movie Production Company:</strong> ${videoData.production_companies[0].name}</li>
             <li style="color:white;" class="listgroup-item"><strong>Movie runtime:</strong> ${videoData.runtime} minutes </li>
+            <li style="color:white;" class="listgroup-item"><strong>Release Date:</strong> ${videoData.release_date} </li>
+            <li style="color:white;" class="listgroup-item"><strong>Movie runtime:</strong> ${videoData.runtime} minutes </li>
             <li style="color:white;" class="listgroup-item"><strong>Providers:</strong> ${providers[0]}, ${providers[1]}, ${providers[2]}</li>
           </ul>
           </div>
@@ -334,6 +337,7 @@ function addToFavorite() {
     console.log("added to favorites");
   }
   localStorage.setItem('Favorites', JSON.stringify(favArr));
+  favorite.innerHTML = ``
   getFavorite()
 }
 
@@ -343,13 +347,12 @@ function getFavorite() {
   for (let i = 0; i < storedFavorite.length; i++) {
     fetch(BASE_URL + '/movie/'+storedFavorite[i]+'?'+API_KEY).then(res => res.json()).then(favData => {
       console.log(favData);
-      //showFavorite(favData)
+      showFavorite(favData)
     })
   }
 }
 
 function showFavorite(data) {
-  favorite.innerHTML = ''
     if (data !== null) {
       const movieEl2 = document.createElement('div');
       movieEl2.classList.add('movie');
@@ -371,6 +374,8 @@ function showFavorite(data) {
       favorite.innerHTML = `<h1 class="no-results">No Results Found</h1>`
     }
 }
+
+favorite.innerHTML = getFavorite();
 
 function getColor(vote) {
     if(vote>= 8){
