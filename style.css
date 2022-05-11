@@ -29,9 +29,16 @@ body{
 }
 
 .brand-title {
-    font-size: 2.5rem;
+    font-size: 4rem;
     color: white;
     margin: .5 rem;
+}
+
+.fav-title {
+    font-size: 2.5rem;
+    color: white;
+    margin: 4 rem;
+    margin-left: 110px;
 }
 
 .navbar-links u1 {
