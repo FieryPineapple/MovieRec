@@ -41,6 +41,10 @@ body{
     margin-left: 110px;
 }
 
+.navbar-links {
+    margin-left: 1640px;
+}
+
 .navbar-links u1 {
     margin: 0;
     padding: 0;
@@ -53,9 +57,10 @@ body{
 
 .navbar-links li a {
     text-decoration: none;
+    font-size: 1.35rem;
     color: white;
     padding: 1rem;
-    display: bloack;
+    display: black;
 }
 
 .navbar-links li:hover {
