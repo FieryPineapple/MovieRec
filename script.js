@@ -446,3 +446,11 @@ function pageCall(page){
     getMovies(url);
   }
 }
+
+function openAccountForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeAccountForm() {
+  document.getElementById("myForm").style.display = "none";
+}
