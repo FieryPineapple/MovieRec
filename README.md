@@ -1,2 +1,2 @@
-# CS 4800: Software Engineering Project
-## MovieRec 
+# MovieRec
+Our Github repository for semester project
