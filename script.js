@@ -454,3 +454,4 @@ function openAccountForm() {
 function closeAccountForm() {
   document.getElementById("myForm").style.display = "none";
 }
+

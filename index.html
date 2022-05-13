@@ -7,26 +7,37 @@
     <title>MovieRec</title>
     <link rel="icon" href="/images/icon.jpg">
 </head>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+<!-- Our script must be loaded after firebase references -->
+<script src="index.js"></script>
 <body>
 
-    <!-- Account button start -->
+    <!-- Account button -->
     <button class="account-button" onclick="openAccountForm()">Account</button>
+    <!-- Account login/signup form -->
 <div class="form-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
+  <form class="form-container">
     <h1>Account</h1>
 
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Email" id="email" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="password" required>
 
-    <button type="submit" class="btn">Login</button>
-    <button type="submit" class="btn">Signup</button>
+    <button type="submit" class="btn" onclick="login()">Login</button>
+    <button type="submit" class="btn" onclick="register()">Signup</button>
     <button type="button" class="btn cancel" onclick="closeAccountForm()">Close</button>
   </form>
 </div>
-<!-- Account button end -->
+
     <nav class="'navbar">
         <div class="brand-title">MovieRec</div>
         <div class="navbar-links">
@@ -66,14 +77,4 @@
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
 </body>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-
-<!-- Our script must be loaded after firebase references -->
-<script src="index.js"></script>
 </html>

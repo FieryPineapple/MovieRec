@@ -19,7 +19,7 @@ var firebaseConfig = {
     // Get all our input fields
     email = document.getElementById('email').value
     password = document.getElementById('password').value
-    favorite = document.getElementById('favorite').value
+    //favorite = document.getElementById('favorite').value
   
     // Validate input fields
     if (validate_email(email) == false || validate_password(password) == false) {
@@ -27,11 +27,7 @@ var firebaseConfig = {
       return
       // Don't continue running the code
     }
-    /*if (validate_field(full_name) == false || validate_field(favourite_song) == false || validate_field(milk_before_cereal) == false) {
-      alert('One or More Extra Fields is Outta Line!!')
-      return
-    }
-*/
+
     // Move on with Auth
     auth.createUserWithEmailAndPassword(email, password)
     .then(function() {
@@ -39,7 +35,7 @@ var firebaseConfig = {
       var user = auth.currentUser
   
       // Add this user to Firebase Database
-      var database_ref = database.ref()
+      //var database_ref = database.ref()
   
       // *************** Create User data when movie added to favorites ****************
       /*
@@ -82,17 +78,6 @@ var firebaseConfig = {
       // Declare user variable
       var user = auth.currentUser
   
-      // Add this user to Firebase Database
-     /* var database_ref = database.ref()
-  
-      // Create User data
-      var user_data = {
-        last_login : Date.now()
-      }
-  
-      // Push to Firebase Database
-      database_ref.child('users/' + user.uid).update(user_data)
-  */
       // DOne
       alert('User Logged In!!')
   
